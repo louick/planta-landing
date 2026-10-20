@@ -369,6 +369,45 @@ button.tgl:hover { border-color: var(--line-2); }
 .mini .mcards b { display: block; padding: 6px 8px 0; font-size: 13px; }
 .mini .mcards span { display: block; padding: 0 8px 8px; color: #59625d; }
 
+/* ============ DEV (acesso direto) ============ */
+.dev .grid2 { align-items: start; }
+.dev h2 { font-size: clamp(36px, 5vw, 60px); }
+.letter { margin-top: 26px; display: grid; gap: 16px; font-size: 18px; color: #cfd8d3; max-width: 56ch; }
+.letter strong { color: var(--text); font-weight: 600; }
+.sign { display: flex; align-items: center; gap: 14px; margin-top: 30px; }
+.avatar { position: relative; width: 60px; height: 60px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; flex: none; overflow: visible; }
+.avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.avatar::after { content: ""; position: absolute; right: 1px; bottom: 1px; width: 15px; height: 15px; border-radius: 50%; background: var(--green); border: 3px solid var(--bg); }
+.sign b { display: block; font-size: 18px; letter-spacing: -0.02em; }
+.sign small { color: var(--muted); font-size: 14px; }
+.dev .btn { margin-top: 30px; }
+.vs { background: var(--card); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; }
+.vs .vh, .vs .vr { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.vs .vh { font-size: 14px; font-weight: 600; }
+.vs .vh span { padding: 18px 20px; }
+.vs .vh span:nth-child(2) { color: var(--muted); }
+.vs .vh span:nth-child(3) { color: var(--accent-ink); background: var(--accent); display: flex; align-items: center; gap: 8px; }
+.vs .vr { border-top: 1px solid var(--line); font-size: 15px; }
+.vs .vr span { padding: 16px 20px; line-height: 1.4; }
+.vs .vr span:first-child { color: var(--muted); font-size: 14px; }
+.vs .vr span:nth-child(2) { color: #8e9a94; text-decoration: line-through; text-decoration-color: rgba(255, 110, 110, .55); }
+.vs .vr span:nth-child(3) { background: rgba(212, 255, 58, .06); color: var(--text); font-weight: 500; }
+.chat { margin-top: 16px; background: #0b141a; border: 1px solid var(--line); border-radius: 24px; padding: 18px; display: grid; gap: 10px; }
+.chat .ch { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.chat .ch .avatar { width: 38px; height: 38px; font-size: 14px; }
+.chat .ch .avatar::after { width: 11px; height: 11px; border-width: 2px; border-color: #0b141a; }
+.chat .ch small { display: block; color: var(--green); font-size: 12.5px; }
+.bub { max-width: 82%; padding: 9px 12px 7px; border-radius: 12px; font-size: 14.5px; line-height: 1.4; }
+.bub time { display: block; text-align: right; font-size: 11px; color: rgba(255, 255, 255, .5); margin-top: 3px; }
+.bub.me { background: #005c4b; justify-self: end; border-top-right-radius: 4px; }
+.bub.him { background: #202c33; justify-self: start; border-top-left-radius: 4px; }
+@media (max-width: 640px) {
+  .vs .vh span, .vs .vr span { padding: 12px 12px; }
+  .vs .vr { font-size: 14px; }
+  .vs .vr span:first-child { font-size: 13px; }
+  .letter { font-size: 17px; }
+}
+
 /* ============ STEPS ============ */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .step { position: relative; border-radius: 24px; padding: 34px 30px; border: 1px solid var(--line); background: var(--card); overflow: hidden; }
@@ -530,6 +569,7 @@ footer { padding: 100px 0 40px; }
       <li><a href="#recursos">Recursos</a></li>
       <li><a href="#incluso">Tudo incluso</a></li>
       <li><a href="#sua-marca">Sua marca</a></li>
+      <li><a href="#suporte">Suporte</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
       <li><a href="#duvidas">Dúvidas</a></li>
     </ul>
@@ -549,7 +589,7 @@ footer { padding: 100px 0 40px; }
       <a class="btn btn-primary wa-link" href="https://wa.me/5591985735084" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Quero uma demonstração <span class="arr">→</span></a>
       <a class="btn btn-ghost" href="#recursos">Ver o que vem na plataforma</a>
     </div>
-    <p class="note rv" style="--d:4">Funciona no computador e no celular. Sem instalar nada.</p>
+    <p class="note rv" style="--d:4">Sem instalar nada · Suporte direto com o desenvolvedor, 24h</p>
   </div>
 
   <div class="stage rv" style="--d:4">
@@ -786,6 +826,39 @@ footer { padding: 100px 0 40px; }
   </div>
 </section>
 
+<section class="sec dev" id="suporte">
+  <div class="wrap grid2">
+    <div class="rv">
+      <span class="kick">Quem está do outro lado</span>
+      <h2>Você fala direto com quem fez o sistema.</h2>
+      <div class="letter">
+        <p>Oi, eu sou o Louick. Fui eu que desenvolvi a Planta, linha por linha.</p>
+        <p>Nas grandes plataformas, você abre um chamado, espera na fila e conversa com um atendente que não pode mudar nada. Aqui é diferente: <strong>você tem o meu WhatsApp</strong>.</p>
+        <p>Deu problema? Me chama, <strong>a qualquer hora</strong>. Precisa de um filtro novo, um campo a mais, um jeito diferente de mostrar os imóveis? A gente conversa e <strong>eu ajusto pra sua imobiliária</strong>. Sem fila, sem robô, sem “vou repassar pro setor responsável”.</p>
+      </div>
+      <div class="sign">
+        <span class="avatar" aria-hidden="true">LA</span>
+        <div><b>Louick Andrade</b><small>Desenvolvedor da Planta · Belém, PA</small></div>
+      </div>
+      <a class="btn btn-primary wa-link" href="https://wa.me/5591985735084" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Falar com o Louick <span class="arr">→</span></a>
+    </div>
+    <div class="rv" style="--d:1">
+      <div class="vs" role="table" aria-label="Comparação de suporte">
+        <div class="vh" role="row"><span role="columnheader"></span><span role="columnheader">Grandes plataformas</span><span role="columnheader"><img src="icon.svg" alt="" width="20" height="20">Planta</span></div>
+        <div class="vr" role="row"><span role="cell">Quem te atende</span><span role="cell">Atendente de primeiro nível</span><span role="cell">O desenvolvedor do sistema</span></div>
+        <div class="vr" role="row"><span role="cell">Como falar</span><span role="cell">Abrir chamado e esperar</span><span role="cell">WhatsApp direto</span></div>
+        <div class="vr" role="row"><span role="cell">Quando</span><span role="cell">Horário comercial</span><span role="cell">24 horas</span></div>
+        <div class="vr" role="row"><span role="cell">Pedido de ajuste</span><span role="cell">“Não está no nosso roadmap”</span><span role="cell">Ajustado pra sua imobiliária</span></div>
+      </div>
+      <div class="chat" aria-label="Exemplo de conversa com o desenvolvedor">
+        <div class="ch"><span class="avatar" aria-hidden="true">LA</span><div><b>Louick Andrade</b><small>online</small></div></div>
+        <p class="bub me">Louick, dá pra colocar um filtro de “aceita financiamento” no site?<time>22:47</time></p>
+        <p class="bub him">Dá sim! Já tô vendo aqui. Te aviso quando estiver no ar 👊<time>22:49</time></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="como-funciona">
   <div class="wrap">
     <div class="sec-head c rv">
@@ -829,6 +902,7 @@ footer { padding: 100px 0 40px; }
       <details class="qa"><summary>Pra quem vão os leads?<i><svg><use href="#i-plus"/></svg></i></summary><p>Para o corretor dono do imóvel, no WhatsApp dele, já com nome e telefone do interessado. Cada contato fica registrado no painel para o follow-up não se perder.</p></details>
       <details class="qa"><summary>Quem acessa o painel?<i><svg><use href="#i-plus"/></svg></i></summary><p>Só quem o administrador cadastra. Não existe cadastro aberto, e o login tem proteção contra tentativas repetidas.</p></details>
       <details class="qa"><summary>Imóvel vendido ou alugado continua anunciado?<i><svg><use href="#i-plus"/></svg></i></summary><p>Não. Mudou o status para vendido, alugado ou inativo, ele sai do site e dos portais automaticamente.</p></details>
+      <details class="qa"><summary>E se eu precisar de ajuda ou de um ajuste?<i><svg><use href="#i-plus"/></svg></i></summary><p>Você fala direto comigo, Louick, o desenvolvedor da Planta, pelo WhatsApp, a qualquer hora. Sem chamado, sem fila, sem atendente repassando recado. Se a sua imobiliária precisa de algo diferente, a gente conversa e eu ajusto.</p></details>
       <details class="qa"><summary>Quanto custa?<i><svg><use href="#i-plus"/></svg></i></summary><p>Depende do tamanho da equipe e da quantidade de imóveis. Chama no WhatsApp, conta como a sua imobiliária funciona hoje e a gente monta a proposta.</p></details>
     </div>
   </div>
@@ -838,11 +912,11 @@ footer { padding: 100px 0 40px; }
   <div class="wrap">
     <div class="box rv">
       <h2>Coloque sua imobiliária <span class="hl">no ar</span></h2>
-      <p>Em uma conversa a gente mostra o painel funcionando e entende o que a sua imobiliária precisa.</p>
+      <p>Me chama no WhatsApp. Eu mesmo te mostro o painel funcionando e entendo o que a sua imobiliária precisa.</p>
       <div class="ctas">
         <a class="btn btn-primary wa-link" href="https://wa.me/5591985735084" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Chamar no WhatsApp <span class="arr">→</span></a>
       </div>
-      <p class="num">WhatsApp <b>(91) 98573-5084</b></p>
+      <p class="num">Louick Andrade · WhatsApp <b>(91) 98573-5084</b></p>
     </div>
   </div>
 </section>
@@ -852,8 +926,8 @@ footer { padding: 100px 0 40px; }
 <footer>
   <div class="wrap">
     <div class="fgrid">
-      <div><a href="#topo" class="logo"><img src="icon.svg" alt="" width="32" height="32">planta</a><p>Site, CRM e portais para imobiliárias. Feito em Belém do Pará.</p></div>
-      <div><h4>Produto</h4><ul><li><a href="#recursos">Recursos</a></li><li><a href="#incluso">Tudo incluso</a></li><li><a href="#sua-marca">Sua marca</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#duvidas">Dúvidas</a></li></ul></div>
+      <div><a href="#topo" class="logo"><img src="icon.svg" alt="" width="32" height="32">planta</a><p>Site, CRM e portais para imobiliárias. Desenvolvido por Louick Andrade, em Belém do Pará.</p></div>
+      <div><h4>Produto</h4><ul><li><a href="#recursos">Recursos</a></li><li><a href="#incluso">Tudo incluso</a></li><li><a href="#sua-marca">Sua marca</a></li><li><a href="#suporte">Suporte</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#duvidas">Dúvidas</a></li></ul></div>
       <div><h4>Portais</h4><ul><li>OLX</li><li>ZAP Imóveis</li><li>Viva Real</li><li>Chaves na Mão</li></ul></div>
       <div><h4>Contato</h4><ul><li><a class="wa-link" href="https://wa.me/5591985735084" target="_blank" rel="noopener">WhatsApp (91) 98573-5084</a></li><li>Belém, Pará</li></ul></div>
     </div>
