@@ -524,6 +524,7 @@ footer { padding: 100px 0 40px; }
   .browser { transform: none !important; }
 }
 </style>
+<link rel="stylesheet" href="assets/crm-demo.css?v=7">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -583,6 +584,7 @@ footer { padding: 100px 0 40px; }
     <a href="#topo" class="logo" aria-label="Planta, início"><img src="logo-light.svg" alt="Planta" width="132" height="34"></a>
     <ul>
       <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#crm">CRM de leads</a></li>
       <li><a href="#incluso">Tudo incluso</a></li>
       <li><a href="#sua-marca">Sua marca</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
@@ -692,7 +694,7 @@ footer { padding: 100px 0 40px; }
       <article class="cell s-3 wide rv" data-glow>
         <span class="ic-b"><svg><use href="#i-chat"/></svg></span>
         <h3>Leads direto no WhatsApp do corretor</h3>
-        <p>O interessado deixa nome e telefone e cai na conversa com quem anunciou. Cada contato fica registrado no funil: novo, contatado, arquivado.</p>
+        <p>O interessado deixa nome e telefone e cai na conversa com quem anunciou. Cada contato entra no funil, com ficha e lembrete de retorno. <a href="#crm" style="color:var(--accent);font-weight:600">Veja o CRM funcionando →</a></p>
         <div class="demo"><div class="leads" id="leads"></div></div>
       </article>
 
@@ -792,6 +794,71 @@ footer { padding: 100px 0 40px; }
   </div>
 </section>
 
+<section class="sec crm-sec" id="crm">
+  <div class="wrap">
+    <div class="crm-head">
+      <h2 class="rv">Nenhum lead esquecido</h2>
+      <p class="crm-lead rv" style="--d:1">Um CRM feito pra imobiliária: <b>funil que se arrasta</b>, ficha completa do cliente, <b>lembretes de retorno</b>, mensagens prontas no WhatsApp e os números da equipe. A janela abaixo é o painel de verdade. Mexa à vontade.</p>
+    </div>
+
+    <div class="tour rv" style="--d:2" id="tour" role="group" aria-label="Atalhos do painel">
+      <button type="button" data-t="drag"><b>Arraste um cartão</b>De “Em atendimento” para “Visita marcada”</button>
+      <button type="button" data-t="lead"><b>Abra uma ficha</b>Histórico, lembretes e perfil de interesse</button>
+      <button type="button" data-t="wa"><b>Mande uma mensagem pronta</b>Nome e imóvel preenchidos sozinhos</button>
+      <button type="button" data-t="nums"><b>Veja os números</b>Conversão, tempo de resposta e perdas</button>
+    </div>
+
+    <div class="crm-win rv" style="--d:3" id="crmWin" data-ui>
+      <div class="chrome"><i></i><i></i><i></i><div class="url"><svg><use href="#i-lock"/></svg><span>painel.suaimobiliaria.com.br/leads</span></div></div>
+      <div class="cw-bar">
+        <span class="site-logo"><i class="bInit">SI</i><span class="bName">Sua Imobiliária</span></span>
+        <nav aria-label="Menu do painel (demonstração)"><span>Painel</span><span>Imóveis</span><span class="on">Leads</span><span>Equipe</span><span>Perfil</span></nav>
+        <span class="cw-user"><i>MA</i><span>Marcos Andrade · admin</span></span>
+      </div>
+      <div class="cw-body" id="cwBody">
+        <div class="cw-top">
+          <div><h3>Leads</h3><p id="cwSub">Arraste os cartões entre as etapas. Clique num lead para abrir a ficha.</p></div>
+          <button type="button" class="ui-btn" id="cwNew"><span aria-hidden="true">+</span><span class="t">Novo lead</span></button>
+        </div>
+        <div class="cw-tabs" role="tablist" aria-label="Seções de leads">
+          <button type="button" role="tab" aria-selected="true" data-tab="funil">Funil</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="numeros">Números</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="mensagens">Mensagens prontas</button>
+        </div>
+
+        <div class="cw-pane on" data-pane="funil">
+          <div class="fl-bar">
+            <input class="ui-in" type="search" id="flQ" placeholder="Buscar por nome, telefone ou imóvel" aria-label="Buscar lead">
+            <button type="button" class="ui-chip red" id="flLate" aria-pressed="false">Retornos atrasados <span class="n"></span></button>
+            <button type="button" class="ui-chip yel" id="flToday" aria-pressed="false">Retornos de hoje <span class="n"></span></button>
+            <button type="button" class="fl-clear" id="flClear" hidden>× Limpar filtros</button>
+            <div class="sp">
+              <button type="button" class="ui-chip dark" id="flArch" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></svg>Arquivados <span class="n"></span></button>
+              <div class="ui-seg" id="flView"><button type="button" data-v="board" aria-pressed="true">Quadro</button><button type="button" data-v="list" aria-pressed="false">Lista</button></div>
+            </div>
+          </div>
+          <div class="arch-note" id="archNote" hidden><span>Leads arquivados: fora do funil e dos retornos, com histórico e etapa guardados.</span><button type="button" id="archBack">← Voltar ao funil</button></div>
+          <div class="board" id="board"></div>
+          <div class="list-wrap" id="listWrap" hidden></div>
+        </div>
+
+        <div class="cw-pane" data-pane="numeros"><div class="nm-scroll" id="nums"></div></div>
+        <div class="cw-pane" data-pane="mensagens"><div class="ms-grid" id="msgs"></div></div>
+
+        <div class="drawer-bg" id="drBg"></div>
+        <aside class="drawer" id="drawer" aria-label="Ficha do lead" aria-hidden="true"></aside>
+        <div class="modal-bg" id="modalBg"><div class="modal" role="dialog" aria-modal="true" id="modal"></div></div>
+        <div class="cw-toast" id="toast" role="status" aria-live="polite"><i></i><span></span></div>
+      </div>
+    </div>
+
+    <div class="crm-foot rv">
+      <span>Dados de exemplo. Na sua imobiliária, cada lead do site entra aqui sozinho, já no WhatsApp do corretor.</span>
+      <a class="wa-link" href="https://wa.me/5591984791651" target="_blank" rel="noopener">Quero ver com os meus imóveis →</a>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="incluso">
   <div class="wrap">
     <div class="sec-head c rv">
@@ -799,7 +866,7 @@ footer { padding: 100px 0 40px; }
       <h2>Cada funcionalidade, sem letra miúda</h2>
       <p>Tudo isso já está funcionando. Nada de módulo extra pra liberar depois.</p>
     </div>
-    <div class="inc"><article class="grp rv" style="--d:0"><header><span class="ic-b"><svg><use href="#i-map"/></svg></span><h3>Site da imobiliária</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>Sua marca</b>, suas cores e seu domínio</span></li><li><svg><use href="#i-check"/></svg><span>Busca por texto: bairro, rua ou código do imóvel</span></li><li><svg><use href="#i-check"/></svg><span><b>Mapa com raio</b> e preço em cada pino</span></li><li><svg><use href="#i-check"/></svg><span>Filtros de venda e aluguel, tipo, bairro, quartos, banheiros, vagas, área, preço, mobília e pet</span></li><li><svg><use href="#i-check"/></svg><span>Mais de 20 comodidades por categoria: lazer, segurança, condomínio e proximidades</span></li><li><svg><use href="#i-check"/></svg><span>Ordenação por recentes, preço, área e quartos</span></li><li><svg><use href="#i-check"/></svg><span>Página “Quem somos” e botão do Instagram</span></li></ul></article><article class="grp rv" style="--d:1"><header><span class="ic-b"><svg><use href="#i-img"/></svg></span><h3>Anúncio de cada imóvel</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>Galeria em tela cheia</b> com arrastar no celular</span></li><li><svg><use href="#i-check"/></svg><span>Mini-mapa com a localização</span></li><li><svg><use href="#i-check"/></svg><span>Venda e aluguel no mesmo imóvel, com condomínio e IPTU</span></li><li><svg><use href="#i-check"/></svg><span>18 tipos: apartamento, casa, cobertura, studio, kitnet, sala, loja, galpão, terreno, sítio e mais</span></li><li><svg><use href="#i-check"/></svg><span>Quartos, suítes, vagas, área útil e total, andar, ano e mobília</span></li><li><svg><use href="#i-check"/></svg><span><b>Código de referência</b> gerado sozinho</span></li></ul></article><article class="grp rv" style="--d:2"><header><span class="ic-b"><svg><use href="#i-chat"/></svg></span><h3>Leads e WhatsApp</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Botão de WhatsApp que <b>pede nome e telefone</b> antes de abrir a conversa</span></li><li><svg><use href="#i-check"/></svg><span>O lead cai no <b>WhatsApp do corretor</b> dono do imóvel</span></li><li><svg><use href="#i-check"/></svg><span>Funil simples: novo, contatado, arquivado</span></li><li><svg><use href="#i-check"/></svg><span>Origem registrada: WhatsApp, formulário ou telefone</span></li><li><svg><use href="#i-check"/></svg><span><b>Captação de proprietários</b>: botão “Quero anunciar meu imóvel”</span></li><li><svg><use href="#i-check"/></svg><span>Proteção contra spam no envio de contatos</span></li></ul></article><article class="grp rv" style="--d:0"><header><span class="ic-b"><svg><use href="#i-send"/></svg></span><h3>Portais imobiliários</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>OLX, ZAP Imóveis e Viva Real</b> pelo padrão VRSync</span></li><li><svg><use href="#i-check"/></svg><span><b>Chaves na Mão</b> no formato próprio do portal</span></li><li><svg><use href="#i-check"/></svg><span>Você escolhe imóvel por imóvel onde anunciar</span></li><li><svg><use href="#i-check"/></svg><span>Aviso antes de publicar se faltar CEP, bairro ou foto</span></li><li><svg><use href="#i-check"/></svg><span>Vendido, alugado ou inativo <b>sai sozinho</b> dos portais</span></li><li><svg><use href="#i-check"/></svg><span>Contrato com o portal continua no seu nome</span></li></ul></article><article class="grp rv" style="--d:1"><header><span class="ic-b"><svg><use href="#i-phone"/></svg></span><h3>Cadastro e fotos</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Cadastro completo direto <b>pelo celular</b>, na hora da visita</span></li><li><svg><use href="#i-check"/></svg><span>Localização marcada no mapa</span></li><li><svg><use href="#i-check"/></svg><span>Envio de várias fotos de uma vez, <b>comprimidas no próprio celular</b></span></li><li><svg><use href="#i-check"/></svg><span>Arraste para ordenar e escolha a <b>foto de capa</b></span></li><li><svg><use href="#i-check"/></svg><span>Miniaturas automáticas para o site carregar rápido</span></li><li><svg><use href="#i-check"/></svg><span>Status: rascunho, disponível, reservado, vendido, alugado, inativo</span></li></ul></article><article class="grp rv" style="--d:2"><header><span class="ic-b"><svg><use href="#i-users"/></svg></span><h3>Equipe, segurança e Google</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Perfis de <b>administrador e corretor</b></span></li><li><svg><use href="#i-check"/></svg><span>Corretor edita só os próprios imóveis; admin cuida de tudo</span></li><li><svg><use href="#i-check"/></svg><span>Perfil do corretor com telefone e CRECI</span></li><li><svg><use href="#i-check"/></svg><span>Sem cadastro aberto e <b>login protegido</b> contra tentativas repetidas</span></li><li><svg><use href="#i-check"/></svg><span>Cada imóvel com <b>página própria no Google</b> e sitemap automático</span></li><li><svg><use href="#i-check"/></svg><span><b>Card com foto</b> quando o imóvel é compartilhado no WhatsApp</span></li></ul></article></div>
+    <div class="inc"><article class="grp rv" style="--d:0"><header><span class="ic-b"><svg><use href="#i-map"/></svg></span><h3>Site da imobiliária</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>Sua marca</b>, suas cores e seu domínio</span></li><li><svg><use href="#i-check"/></svg><span>Busca por texto: bairro, rua ou código do imóvel</span></li><li><svg><use href="#i-check"/></svg><span><b>Mapa com raio</b> e preço em cada pino</span></li><li><svg><use href="#i-check"/></svg><span>Filtros de venda e aluguel, tipo, bairro, quartos, banheiros, vagas, área, preço, mobília e pet</span></li><li><svg><use href="#i-check"/></svg><span>Mais de 20 comodidades por categoria: lazer, segurança, condomínio e proximidades</span></li><li><svg><use href="#i-check"/></svg><span>Ordenação por recentes, preço, área e quartos</span></li><li><svg><use href="#i-check"/></svg><span>Página “Quem somos” e botão do Instagram</span></li></ul></article><article class="grp rv" style="--d:1"><header><span class="ic-b"><svg><use href="#i-img"/></svg></span><h3>Anúncio de cada imóvel</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>Galeria em tela cheia</b> com arrastar no celular</span></li><li><svg><use href="#i-check"/></svg><span>Mini-mapa com a localização</span></li><li><svg><use href="#i-check"/></svg><span>Venda e aluguel no mesmo imóvel, com condomínio e IPTU</span></li><li><svg><use href="#i-check"/></svg><span>18 tipos: apartamento, casa, cobertura, studio, kitnet, sala, loja, galpão, terreno, sítio e mais</span></li><li><svg><use href="#i-check"/></svg><span>Quartos, suítes, vagas, área útil e total, andar, ano e mobília</span></li><li><svg><use href="#i-check"/></svg><span><b>Código de referência</b> gerado sozinho</span></li></ul></article><article class="grp rv" style="--d:2"><header><span class="ic-b"><svg><use href="#i-chat"/></svg></span><h3>Leads, CRM e WhatsApp</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Botão de WhatsApp que <b>pede nome e telefone</b> antes de abrir a conversa</span></li><li><svg><use href="#i-check"/></svg><span>O lead cai no <b>WhatsApp do corretor</b> dono do imóvel</span></li><li><svg><use href="#i-check"/></svg><span><b>Funil arrastável</b> em seis etapas, de novo a fechado ou perdido, com o motivo da perda</span></li><li><svg><use href="#i-check"/></svg><span><b>Ficha do cliente</b> com histórico, anotações, ligações e corretor responsável</span></li><li><svg><use href="#i-check"/></svg><span><b>Lembretes de retorno</b>, com aviso dos atrasados e dos de hoje</span></li><li><svg><use href="#i-check"/></svg><span><b>Perfil de interesse</b> que sugere os imóveis que combinam</span></li><li><svg><use href="#i-check"/></svg><span><b>Mensagens prontas</b> no WhatsApp, com nome, imóvel e link preenchidos</span></li><li><svg><use href="#i-check"/></svg><span><b>Números da equipe</b>: conversão, tempo até o 1º contato, perdas e ranking por corretor</span></li><li><svg><use href="#i-check"/></svg><span>Arquivar lead sem perder o histórico</span></li><li><svg><use href="#i-check"/></svg><span>Origem registrada: WhatsApp, formulário ou telefone</span></li><li><svg><use href="#i-check"/></svg><span><b>Captação de proprietários</b>: botão “Quero anunciar meu imóvel”</span></li><li><svg><use href="#i-check"/></svg><span>Proteção contra spam no envio de contatos</span></li></ul></article><article class="grp rv" style="--d:0"><header><span class="ic-b"><svg><use href="#i-send"/></svg></span><h3>Portais imobiliários</h3></header><ul><li><svg><use href="#i-check"/></svg><span><b>OLX, ZAP Imóveis e Viva Real</b> pelo padrão VRSync</span></li><li><svg><use href="#i-check"/></svg><span><b>Chaves na Mão</b> no formato próprio do portal</span></li><li><svg><use href="#i-check"/></svg><span>Você escolhe imóvel por imóvel onde anunciar</span></li><li><svg><use href="#i-check"/></svg><span>Aviso antes de publicar se faltar CEP, bairro ou foto</span></li><li><svg><use href="#i-check"/></svg><span>Vendido, alugado ou inativo <b>sai sozinho</b> dos portais</span></li><li><svg><use href="#i-check"/></svg><span>Contrato com o portal continua no seu nome</span></li></ul></article><article class="grp rv" style="--d:1"><header><span class="ic-b"><svg><use href="#i-phone"/></svg></span><h3>Cadastro e fotos</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Cadastro completo direto <b>pelo celular</b>, na hora da visita</span></li><li><svg><use href="#i-check"/></svg><span>Localização marcada no mapa</span></li><li><svg><use href="#i-check"/></svg><span>Envio de várias fotos de uma vez, <b>comprimidas no próprio celular</b></span></li><li><svg><use href="#i-check"/></svg><span>Arraste para ordenar e escolha a <b>foto de capa</b></span></li><li><svg><use href="#i-check"/></svg><span>Miniaturas automáticas para o site carregar rápido</span></li><li><svg><use href="#i-check"/></svg><span>Status: rascunho, disponível, reservado, vendido, alugado, inativo</span></li></ul></article><article class="grp rv" style="--d:2"><header><span class="ic-b"><svg><use href="#i-users"/></svg></span><h3>Equipe, segurança e Google</h3></header><ul><li><svg><use href="#i-check"/></svg><span>Perfis de <b>administrador e corretor</b></span></li><li><svg><use href="#i-check"/></svg><span>Corretor edita só os próprios imóveis; admin cuida de tudo</span></li><li><svg><use href="#i-check"/></svg><span>Perfil do corretor com telefone e CRECI</span></li><li><svg><use href="#i-check"/></svg><span>Sem cadastro aberto e <b>login protegido</b> contra tentativas repetidas</span></li><li><svg><use href="#i-check"/></svg><span>Cada imóvel com <b>página própria no Google</b> e sitemap automático</span></li><li><svg><use href="#i-check"/></svg><span><b>Card com foto</b> quando o imóvel é compartilhado no WhatsApp</span></li></ul></article></div>
     <div class="inc-cta rv"><a class="btn btn-primary wa-link" href="https://wa.me/5591984791651" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Quero ver tudo isso funcionando <span class="arr">→</span></a></div>
   </div>
 </section>
@@ -881,7 +948,8 @@ footer { padding: 100px 0 40px; }
       <details class="qa" open><summary>Fica com a cara da minha imobiliária?<i><svg><use href="#i-plus"/></svg></i></summary><p>Fica. Logo, cores, domínio próprio, página “Quem somos”, CRECI, CNPJ e endereço no rodapé. O cliente vê a sua marca, não a nossa.</p></details>
       <details class="qa"><summary>Preciso instalar alguma coisa?<i><svg><use href="#i-plus"/></svg></i></summary><p>Não. Tudo roda no navegador, no computador ou no celular. O corretor cadastra o imóvel e sobe as fotos na hora da visita.</p></details>
       <details class="qa"><summary>Como os anúncios chegam aos portais?<i><svg><use href="#i-plus"/></svg></i></summary><p>A Planta gera um feed para cada portal: padrão VRSync para OLX, ZAP e Viva Real, e o formato próprio do Chaves na Mão. Você escolhe imóvel por imóvel onde ele aparece, e o sistema avisa quando falta CEP, bairro ou foto. O contrato com o portal continua no seu nome.</p></details>
-      <details class="qa"><summary>Pra quem vão os leads?<i><svg><use href="#i-plus"/></svg></i></summary><p>Para o corretor dono do imóvel, no WhatsApp dele, já com nome e telefone do interessado. Cada contato fica registrado no painel para o follow-up não se perder.</p></details>
+      <details class="qa"><summary>Pra quem vão os leads?<i><svg><use href="#i-plus"/></svg></i></summary><p>Para o corretor dono do imóvel, no WhatsApp dele, já com nome e telefone do interessado. Cada contato entra no funil do painel, com ficha, lembretes de retorno e mensagens prontas, para o follow-up não se perder.</p></details>
+      <details class="qa"><summary>O CRM de leads vem incluso?<i><svg><use href="#i-plus"/></svg></i></summary><p>Vem. Funil, ficha do cliente, lembretes de retorno, mensagens prontas, arquivados e os números da equipe fazem parte da plataforma, sem módulo extra.</p></details>
       <details class="qa"><summary>Quem acessa o painel?<i><svg><use href="#i-plus"/></svg></i></summary><p>Só quem o administrador cadastra. Não existe cadastro aberto, e o login tem proteção contra tentativas repetidas.</p></details>
       <details class="qa"><summary>Imóvel vendido ou alugado continua anunciado?<i><svg><use href="#i-plus"/></svg></i></summary><p>Não. Mudou o status para vendido, alugado ou inativo, ele sai do site e dos portais automaticamente.</p></details>
       <details class="qa"><summary>Quanto custa?<i><svg><use href="#i-plus"/></svg></i></summary><p>Depende do tamanho da equipe e da quantidade de imóveis. Chama no WhatsApp, conta como a sua imobiliária funciona hoje e a gente monta a proposta.</p></details>
@@ -1020,7 +1088,7 @@ footer { padding: 100px 0 40px; }
   const people = [['AB', 'Ana Beatriz Lobato', 'Cobertura duplex · WhatsApp', '#d4ff3a'], ['RM', 'Rafael Monteiro', 'Casa no Marco · WhatsApp', '#7de3b5'], ['CP', 'Cláudia Pinheiro', 'Sala comercial · Formulário', '#9cc7ff'], ['JV', 'João Victor Reis', 'Studio no Guamá · WhatsApp', '#ffc58a'], ['MS', 'Mariana Souto', 'Apartamento em Nazaré · WhatsApp', '#f5a3c7']];
   let lp = 0;
   const pushLead = () => {
-    [...leadsEl.children].forEach((r) => { r.classList.remove('new'); const s = r.querySelector('.st'); s.className = 'st c'; s.textContent = 'Contatado'; });
+    [...leadsEl.children].forEach((r) => { r.classList.remove('new'); const s = r.querySelector('.st'); s.className = 'st c'; s.textContent = 'Em atendimento'; });
     const p = people[lp++ % people.length];
     leadsEl.insertAdjacentHTML('afterbegin', `<div class="ld new"><span class="av" style="background:${p[3]}">${p[0]}</span><div>${p[1]}<small>${p[2]}</small></div><span class="st n">Novo</span></div>`);
     while (leadsEl.children.length > 3) leadsEl.lastElementChild.remove();
@@ -1085,5 +1153,6 @@ footer { padding: 100px 0 40px; }
   }));
 })();
 </script>
+<script src="assets/crm-demo.js?v=7" defer></script>
 </body>
 </html>
